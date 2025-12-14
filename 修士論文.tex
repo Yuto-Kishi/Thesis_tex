@@ -1,0 +1,84 @@
+% --- ここからコピー ---
+\documentclass[12pt]{ltjsreport} % LuaLaTeX専用の頑丈なクラス
+
+% 必要なパッケージ
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref} % リンク機能
+
+\begin{document}
+
+% === 表紙 (Title Page) ===
+\begin{titlepage}
+    \centering
+    \vspace*{10mm}
+    
+    {\Large 修士論文} \\
+    \vspace{40mm}
+    
+   % タイトル
+    {\LARGE \bfseries 家電情報を活用したユーザー状況取得に関する研究} \\
+    
+    \vspace{50mm}
+    
+    % 学籍番号・氏名
+    {\Large
+        2410040 \quad 岸　雄斗 \\
+    }
+    
+    \vspace{10mm}
+    
+    % 指導教員
+    {\large 主指導教員：丹　康雄 教授} \\
+    
+    \vspace{\fill}
+    
+    % 所属
+    {\Large
+        北陸先端科学技術大学院大学 \\
+        先端科学技術研究科 \\
+        (情報科学) \\
+    }
+    
+    \vspace{10mm}
+    
+    % 提出年月
+    {\Large 令和8年 2月}
+    \vspace*{10mm}
+    
+\end{titlepage}
+% === 表紙ここまで ===
+
+% ページ番号の設定（ローマ数字）
+\pagenumbering{roman}
+
+% 概要
+\chapter*{概要}
+近年、スマートホーム技術の進展に伴い、家庭内の機器を活用したエネルギー管理や見守りサービスが注目されている。しかし、既存の見守りシステムの多くは、カメラや人感センサーなどの専用機器を新たに設置する必要があり、居住者のプライバシー侵害への懸念や、導入コスト・設置の手間が課題となっている。 そこで本研究では、照明や空調機器など、家庭内に既に存在する家電製品の稼働履歴や操作情報を活用し、居住者の状況（在室確認や大まかな位置推定）を取得する手法を提案する。提案手法は、専用センサーへの依存を最小限に抑えることで、居住者に監視されているという不快感を与えず、かつ低コストで導入可能なシステムの実現を目指すものである。 評価においては、従来の専用センサーを用いたシステムと比較し、状況推定に必要な追加センサーの削減数および導入コストの観点から有効性を検証する。
+
+\chapter*{Abstract}
+In recent years, with the advancement of smart home technology, services utilizing home data, such as energy management and monitoring, have gained attention. However, conventional monitoring systems often require the installation of dedicated devices like cameras or motion sensors. These systems pose challenges regarding privacy invasion concerns, high installation costs, and the effort required for setup. To address these issues, this research proposes a method to acquire user status information, such as presence and approximate location, by utilizing operation data from existing home appliances (e.g., lighting and air conditioners). The proposed method aims to minimize dependency on dedicated sensors, thereby realizing a system that can be introduced at a low cost without causing the resident to feel monitored. In the evaluation, we will verify the effectiveness of the proposed system by comparing it with conventional systems in terms of the reduction in the number of additional sensors required and the cost of implementation.
+
+% 目次
+\tableofcontents
+\newpage
+
+% 本文（算用数字）
+\pagenumbering{arabic}
+
+\chapter{序論}
+\section{研究の背景}
+ここに本文を書き始めてください。日本語が表示されていれば成功です。
+
+\chapter{提案手法}
+システム概要などを記述します。
+
+\chapter{結論}
+まとめを記述します。
+
+\chapter*{謝辞}
+指導教員や研究室メンバーへの感謝を記述します。
+
+\end{document}
+% --- ここまでコピー ---

@@ -1,0 +1,19 @@
+# LaTeXの中間ファイルを無視する設定
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.dvi
+
+# PDFはGit管理に含めるか好みによりますが、
+# 自動生成されるものは含めないのが一般的です。
+# 含めたい場合は下の行を消してください。
+*.pdf
+
+# Macのシステムファイル
+.DS_Store
