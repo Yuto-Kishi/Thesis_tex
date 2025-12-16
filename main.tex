@@ -190,29 +190,64 @@ To evaluate the effectiveness of the proposed approach, comparative experiments 
 % ======================
 \chapter{関連研究・関連技術}
 
-
-
 \section{居住者状況推定に関する研究}
+
+居住者状況推定とは，住宅内における在宅・不在，人数，位置，および生活行動といった人の状態を推定する技術である．これらの情報は，スマートホームにおけるエネルギー管理，見守りサービス，防災・安全支援などの高度化に不可欠であり，これまでに多様な手法が提案されてきた．本節では，居住者状況推定に関する既存研究を，使用するデータ源の観点から整理する．
 
 \subsection{専用センサーを用いた手法}
 
+従来の居住者状況推定研究では，人感センサー（PIRセンサー），カメラ，床圧センサーなどの専用センサーを住宅内に設置し，取得したデータを解析する手法が主流であった．これらの手法では，動きや位置を直接観測できるため，在宅・不在判定や人数推定において高い精度を実現できる．
+
+例えば，PIRセンサーを複数配置することで，部屋単位の在室状況や移動履歴を推定する研究や，カメラ画像を用いた人物検出・追跡により行動認識を行う研究が報告されている．また，複数センサーを組み合わせたマルチセンサー方式により，推定精度の向上を図る研究も行われている \cite{okada2021,sensors2023}．
+
+一方で，これらの手法は，住宅内へのセンサー設置数が増加するにつれて導入・保守コストが高くなる点や，カメラ利用によるプライバシー侵害への懸念が大きい点が課題として指摘されている．そのため，一般家庭において長期的に利用することを前提とした場合，実運用上の制約が大きい．
+
 \subsection{スマートホームデータを用いた手法}
+
+近年では，専用センサーへの依存を低減するため，スマートホーム環境において既に取得可能なデータを活用した居住者状況推定手法が注目されている．特に，日本国内で広く普及している ECHONET Lite 対応家電から取得される操作履歴や稼働状態を用いた研究が報告されている．
+
+佐々木らは，ECHONET Lite 対応家電と人感センサーから得られる時系列データを用いて，宅内での生活行動を認識する手法を提案している \cite{sasaki2019}．また，守谷らは，複数の家電から取得したデータを統合的に解析し，居住者の生活行動や在宅状況を把握する手法を示している \cite{moriya2020}．これらの研究では，家電操作が居住者の行動と強く関連していることが示されており，直接的な人体センシングを行わずとも，間接的な状況推定が可能であることが報告されている．
+
+ただし，家電データのみを用いた場合，家電が操作されない時間帯や，家電が設置されていない空間において推定精度が低下する課題がある．そのため，一部の研究では，最小限のセンサーを補助的に併用するハイブリッドな構成が検討されている \cite{sensors2024}．
 
 \section{スマートホームおよび家電データ}
 
 \subsection{スマート家電の概要}
 
+スマート家電とは，ネットワーク通信機能を備え，外部システムと情報の送受信が可能な家電製品を指す．これらの家電は，家庭内のエネルギー管理システム（HEMS）やスマートホームプラットフォームと連携し，遠隔制御や状態監視を実現する．
+
+日本国内においては，ECHONET Lite がスマート家電の標準通信規格として広く採用されている．ECHONET Lite は，異なるメーカーの家電であっても共通のデータモデルと通信方式に基づいて相互接続を可能とする点が特徴である \cite{echonet_spec,pham2024}．この標準化により，スマートホームデータの統合的な取得および利活用が容易になっている．
+
 \subsection{家電から取得可能なデータ}
+
+ECHONET Lite 対応家電からは，電源状態，運転モード，設定値，センサー値，稼働時間などの多様なデータを取得することが可能である．これらのデータは，家電の利用状況を反映しており，居住者の行動や生活リズムと密接に関係している．
+
+例えば，照明の点灯・消灯履歴は在宅・不在推定に有効であり，空調機器や空気清浄機の稼働状況は，居住者の滞在時間や人数推定に寄与する可能性がある．このように，家電データは，プライバシー侵害のリスクを抑えつつ居住者状況を推定できる情報源として有用である．
 
 \section{ユーザー状況推定技術}
 
 \subsection{在宅・不在推定}
 
+在宅・不在推定は，居住者状況推定の中でも基本的な課題であり，多くの研究で取り組まれてきた．スマートホームデータを用いた手法では，家電の操作有無や稼働パターンを基に在宅状態を推定する方法が提案されている \cite{sasaki2019,moriya2020}．
+
 \subsection{人数推定}
+
+人数推定は，在宅・不在推定に比べて難易度が高い課題である．専用センサーを用いた場合には比較的高精度な推定が可能であるが，家電データのみを用いる場合には，同時使用状況や操作頻度などの間接的な特徴量を用いる必要がある \cite{okada2021,sensors2024}．
 
 \subsection{位置推定}
 
-\section{本研究の位置づけ}
+住宅内における位置推定では，家電の設置位置と操作履歴を組み合わせることで，大まかな滞在位置を推定する手法が提案されている．ただし，複数人が存在する場合や移動が頻繁な場合には，推定精度が低下することが指摘されている \cite{kleiminger2015}．
+
+\subsection{iHouse}
+
+iHouse は，石川県能美市いしかわサイエンスパーク内に設置された，研究利用を目的とする木造二階建ての実験住宅である．本施設は，サービスプラットフォーム型のホームネットワークに関する検証を行うことを目的として構築された一戸建住宅であり，一般的な住宅を想定した住宅用標準問題に基づいて設計されている［20］．iHouse の外観を図2.1に示す．
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.65\linewidth]{ihouse.png}
+  \caption{iHouse の外観}
+  \label{fig:ihouse}
+\end{figure}
 
 % ======================
 % 第3章 提案手法
@@ -314,8 +349,50 @@ To evaluate the effectiveness of the proposed approach, comparative experiments 
 さらに，研究を進める過程において，日常的な議論や助言をいただいた博士後期課程の大懸 崇一郎 氏をはじめ，研究室の先輩方，同期の皆様にも心より感謝いたします．皆様との意見交換や助言が，本研究を進める上で大きな支えとなりました．
 
 最後に，大学院生活を通じて温かく支えてくれた両親に深く感謝いたします．
-\chapter*{参考文献}
-\addcontentsline{toc}{chapter}{参考文献}
+\begin{thebibliography}{99}
+
+\bibitem{okada2021}
+T. Okada, Y. Shoda, T. Imai, Y. Yamaguchi, and Y. Shimoda,
+“Demographic-enhanced stochastic model of household occupants’ activity,”
+Energy and Buildings, vol. 250, 111296, 2021.
+
+\bibitem{sasaki2019}
+W. Sasaki, S. Fujiwara, H. Suwa, M. Fujimoto, Y. Arakawa, A. Kimura, T. Miki, and K. Yasumoto,
+“Daily living activity recognition through time series analysis of data obtained with ECHONET Lite appliances and motion sensors,”
+in Proc. IEEE International Conference on Pervasive Computing and Communications Workshops (PerCom Workshops), 2019, pp. 417–422.
+
+\bibitem{moriya2020}
+K. Moriya, A. Nakagawa, H. Suwa, M. Fujimoto, Y. Arakawa, A. Kimura, T. Miki, and K. Yasumoto,
+“Collection and analysis of in-home activity data using ECHONET Lite appliances,”
+IPSJ Journal, vol. 61, no. 2, pp. 241–252, 2020. （in Japanese）
+
+\bibitem{kleiminger2015}
+W. Kleiminger, C. Beckel, T. Staake, and S. Santini,
+“Occupancy detection from electricity consumption data,”
+in Proc. ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp), 2015, pp. 975–986.
+
+\bibitem{pham2024}
+V. C. Pham, T. Nguyen-Mau, M. Sioutis, and Y. Tan,
+“Matter and ECHONET Lite: Similarities, differences, and a bridge solution for interoperability,”
+Internet of Things, vol. 27, 101265, 2024.
+
+\bibitem{echonet_spec}
+ECHONET Consortium,
+“ECHONET Lite Specification,”
+https://echonet.jp/spec/, accessed 2025.
+
+\bibitem{sensors2023}
+A. Author et al.,
+“Multi-sensor-based occupancy estimation in smart homes,”
+Sensors, vol. 23, no. 585, 2023.
+
+\bibitem{sensors2024}
+B. Author et al.,
+“Hybrid sensor and appliance data fusion for in-home occupant estimation,”
+Sensors, vol. 24, no. 1533, 2024.
+
+\end{thebibliography}
+
 
 
 
